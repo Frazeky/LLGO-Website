@@ -9,7 +9,7 @@ var app = express();
 
 app.use(cors());
 
-const API_KEY = "RGAPI-0bd17b6f-6d67-48ec-b1a3-ebe5158f77af";
+const API_KEY = "RGAPI-969ac020-3071-48c4-8415-2b9d552431c7";
 
 function getPlayerPUUID(playerName, playerTag){
     //return axios.get("https://euw1.api.riotgames.com" + "/lol/summoner/v4/summoners/by-riot-id/" + playerName + "?api_key=" + API_KEY)
@@ -54,7 +54,7 @@ app.get('/past5Games', async (req,res) => {
     //res.json()
     //res.json(gameIDs);
     res.json(matchDataArray);
-    res.json(gameIDs);
+    //res.json(gameIDs);
 
 });
 
