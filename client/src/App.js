@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [searchText, setSearchText] = useState("");
+  //const [searchText, setSearchText] = useState(""); <input type="text" onChange={e => setSearchText(e.target.value)}></input>
   const [gameList, setGameList] = useState([]);
 
   function getPlayerGames(event){
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <h2>Welcome to our proxy app</h2>
-      <input type="text" onChange={e => setSearchText(e.target.value)}></input>
+       
       <button onClick={getPlayerGames}>Get the past 5 games</button>
     </div>
   );

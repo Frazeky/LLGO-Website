@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/LLGO-Website/static/css/main.f855e6bc.css",
-    "main.js": "/LLGO-Website/static/js/main.fbea83aa.js",
+    "main.js": "/LLGO-Website/static/js/main.40bb3fef.js",
     "static/js/453.419a5d54.chunk.js": "/LLGO-Website/static/js/453.419a5d54.chunk.js",
     "index.html": "/LLGO-Website/index.html",
     "main.f855e6bc.css.map": "/LLGO-Website/static/css/main.f855e6bc.css.map",
-    "main.fbea83aa.js.map": "/LLGO-Website/static/js/main.fbea83aa.js.map",
+    "main.40bb3fef.js.map": "/LLGO-Website/static/js/main.40bb3fef.js.map",
     "453.419a5d54.chunk.js.map": "/LLGO-Website/static/js/453.419a5d54.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.fbea83aa.js"
+    "static/js/main.40bb3fef.js"
   ]
 }
