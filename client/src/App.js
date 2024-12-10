@@ -43,6 +43,16 @@ function App() {
       </div>
 
       <button onClick={getPlayerGames}>Get the past 5 games</button>
+
+      {/* Display the fetched game list */}
+      <div>
+        <h3>Game List:</h3>
+        <ul>
+          {gameList.map((game, index) => (
+            <li key={index}>{JSON.stringify(game)}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
