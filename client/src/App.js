@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
-  const [gameList, setGameList] = useState([]);
+  //const [gameList, setGameList] = useState([]);
 
   function getPlayerGames() {
     axios.get("https://llgo-website-backend.onrender.com/past5Games")
