@@ -40,7 +40,7 @@ function App() {
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
         />
-        <button onClick={handleSendValues}>Send Values</button>
+        <button onClick={SummonernameInput}>Send Values</button>
       </div>
 
       <button onClick={getPlayerGames}>Get the past 5 games</button>
