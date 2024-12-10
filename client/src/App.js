@@ -3,15 +3,18 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [riotId, setRiotId] = useState("");
+  const [riotName, setRiotName] = useState("");
+  const [riotTag, setRiotTag] = useState("");
   const [gameList, setGameList] = useState([]);
   const [summonerInfo, setSummonerInfo] = useState(null);
 
   function getPlayerGames() {
-    if (!riotId.trim()) {
-      alert("Please enter a Riot ID.");
+    if (!riotName.trim() || !riotTag.trim()) {
+      alert("Please enter both Riot Name and Tag.");
       return;
     }
+
+    const riotId = `${riotName}/${riotTag}`;
 
     axios
       .get(`https://llgo-website-backend.onrender.com:10000/past5Games?riotId=${encodeURIComponent(riotId)}`)
@@ -21,7 +24,7 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to fetch data. Please check the Riot ID or try again later.");
+        alert("Failed to fetch data. Please check the Riot Name and Tag or try again later.");
       });
   }
 
@@ -32,9 +35,15 @@ function App() {
       <div>
         <input
           type="text"
-          placeholder="Enter Riot ID"
-          value={riotId}
-          onChange={(e) => setRiotId(e.target.value)}
+          placeholder="Enter Riot Name"
+          value={riotName}
+          onChange={(e) => setRiotName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Enter Riot Tag"
+          value={riotTag}
+          onChange={(e) => setRiotTag(e.target.value)}
         />
         <button onClick={getPlayerGames}>Get Player Data</button>
       </div>
