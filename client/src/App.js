@@ -9,24 +9,21 @@ function App() {
 
   function getPlayerGames() {
     axios.get("https://llgo-website-backend.onrender.com/past5Games", {
-      params: {
-        summonername: summonername,
-        summonertag: summonertag
-      }
+      params: { summonername, summonertag },
     })
-      .then(function (response) {
+      .then((response) => {
         setGameList(response.data);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.error(error);
       });
   }
 
   return (
     <div className="App">
-      <h2>Welcome to our proxy app</h2>
+      <h1>LLGO Mega</h1>
 
-      <div>
+      <div className="input-container">
         <input
           type="text"
           placeholder="Summoner Name"
@@ -39,19 +36,29 @@ function App() {
           value={summonertag}
           onChange={(e) => setSummonertag(e.target.value)}
         />
-        <button onClick={getPlayerGames}>Send Values</button>
+        <button onClick={getPlayerGames}>Fetch Games</button>
       </div>
 
-      <button onClick={getPlayerGames}>Get the past 5 games</button>
-
-      {/* Display the fetched game list */}
-      <div>
-        <h3>Game List:</h3>
-        <ul>
-          {gameList.map((game, index) => (
-            <li key={index}>{JSON.stringify(game)}</li>
-          ))}
-        </ul>
+      <div className="game-list">
+        {gameList.length > 0 ? (
+          gameList.map((game, index) => (
+            <div className="game-card" key={index}>
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/Aatrox.png`} // Replace with actual API data
+                alt="Summoner Icon"
+                className="summoner-icon"
+              />
+              <div className="game-info">
+                <h3>Match {index + 1}</h3>
+                <p><strong>Game Duration:</strong> {game.gameDuration}s</p>
+                <p><strong>Game Type:</strong> {game.gameType}</p>
+              </div>
+              <button className="details-button">View Details</button>
+            </div>
+          ))
+        ) : (
+          <p>No games to display. Enter details to fetch matches.</p>
+        )}
       </div>
     </div>
   );
