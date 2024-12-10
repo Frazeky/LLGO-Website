@@ -7,7 +7,7 @@ function App() {
   const [gameList, setGameList] = useState([]);
 
   function getPlayerGames(event){
-    axios.get("http://localhost:4000/past5Games")
+    axios.get("https://llgo-website-backend.onrender.com/past5Games")
       .then(function (response){
         setGameList(response.data)
       }).catch(function(error){

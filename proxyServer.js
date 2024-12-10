@@ -1,6 +1,8 @@
 var express = require('express');
 var cors = require('cors');
 const axios = require('axios');
+const PORT = process.env.PORT || 4000;
+
 
 //in one terminal do npm start
 //second do cd client -> npm start
@@ -9,7 +11,7 @@ var app = express();
 
 app.use(cors());
 
-const API_KEY = "RGAPI-b98fe6f7-dc71-47a0-9adf-994f227f50e0";
+const API_KEY = "RGAPI-4c23ef80-3fdd-4697-8a91-a8cc21aef064";
 
 function getPlayerPUUID(playerName, playerTag){
     //return axios.get("https://euw1.api.riotgames.com" + "/lol/summoner/v4/summoners/by-riot-id/" + playerName + "?api_key=" + API_KEY)
@@ -58,6 +60,6 @@ app.get('/past5Games', async (req,res) => {
 
 });
 
-app.listen(4000, function (){
-    console.log("Server started on port 4000");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
