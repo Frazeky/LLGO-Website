@@ -17,10 +17,10 @@ function App() {
       })
   }
 
- /* function getFullSummoner(){
+  function getFullSummoner(){
     console.log("Name:", setInputSN);    
     console.log("Tag:", setInputST);
-  }*/
+  }
 
 
   console.log(gameList);
@@ -42,7 +42,7 @@ function App() {
           value={summonertag}
           onChange={(e) => setInputST(e.target.value)}
         />
-        <button onClick={handleSendValues}>Send Values</button>
+        <button onClick={getFullSummoner}>Send Values</button>
       </div>
 
       <button onClick={getPlayerGames}>Get the past 5 games</button>
