@@ -14,10 +14,10 @@ function App() {
       return;
     }
 
-    const riotId = `${riotName}/${riotTag}`;
+    const riotId = `${encodeURIComponent(riotName)}/${encodeURIComponent(riotTag)}`;
 
     axios
-      .get(`https://llgo-website-backend.onrender.com:10000/past5Games?riotId=${encodeURIComponent(riotId)}`)
+      .get(`https://llgo-website-backend.onrender.com:10000/past5Games?riotId=${riotId}`)
       .then((response) => {
         setGameList(response.data.matches); // Assuming the backend returns matches in `response.data.matches`
         setSummonerInfo(response.data.summoner); // Assuming the backend includes summoner info in `response.data.summoner`
