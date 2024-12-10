@@ -22,43 +22,30 @@ function getPlayerPUUID(playerName, playerTag){
     }).catch(err => err);
 }
 
-app.get('/past5Games', async (req,res) => {
-    const playerName = 'Im Feet lover'
-    const playerTag = 'Foot'
-    const PUUID = await getPlayerPUUID(playerName, playerTag);
-    //const API_CALL = "https://europe.api.riotgames.com" + "/riot/account/v1/accounts/by-riot-id/" + playerName + "/" + playerTag + "?api_key=" + API_KEY
-    //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/S0igukpP8xo2IHKoonez88fMQBS09f707PGmoZWQbpfMeZhxPeU1VtTkjIWE3V3GyVj5_iP9gpVwjQ/ids?start=0&count=5&api_key=RGAPI-0bd17b6f-6d67-48ec-b1a3-ebe5158f77af
-    //REMOVE COUNT START FROM CODE TO WORK
-    const API_CALL = "https://europe.api.riotgames.com" + "/lol/match/v5/matches/by-puuid/" + PUUID + "/ids" + "?" + "start=0&count=5&" + "api_key=" + API_KEY
-    //WORKING PUUID //const API_CALL = "https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/Im%20Feet%20lover/Foot?api_key=RGAPI-0bd17b6f-6d67-48ec-b1a3-ebe5158f77af"
-    //get api call
-
-    const gameIDs = await axios.get(API_CALL)
-        .then(response => response.data)
-        .catch(err => err)
-
-    //list of game id strings
-    console.log(gameIDs);
-    
-    //loop through ids and get info based on ids (api calls)
-    //https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_7215114668?api_key=RGAPI-0bd17b6f-6d67-48ec-b1a3-ebe5158f77af
-    var matchDataArray = [];
-    for(var i=0; i<gameIDs.length; i++){
-        const matchID = gameIDs[i];
-        const matchData = await axios.get("https://europe.api.riotgames.com/" + "lol/match/v5/matches/" + matchID + "?api_key=" + API_KEY)
-        .then(response => response.data)
-        .catch(err => err)
-        matchDataArray.push(matchData);
+app.get('/past5Games', async (req, res) => {
+    const { summonername, summonertag } = req.query;
+    if (!summonername || !summonertag) {
+        return res.status(400).send("Summoner name and tag are required.");
     }
-    //save info above in array and give array as JSON responce to user
-    
-    //res.json()
-    //res.json()
-    //res.json(gameIDs);
-    res.json(matchDataArray);
-    //res.json(gameIDs);
-
+    try {
+        const PUUID = await getPlayerPUUID(summonername, summonertag);
+        const API_CALL = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" + PUUID + "/ids?start=0&count=5&api_key=" + API_KEY;
+        const gameIDs = await axios.get(API_CALL).then(response => response.data);
+        
+        const matchDataArray = [];
+        for (const matchID of gameIDs) {
+            const matchData = await axios.get("https://europe.api.riotgames.com/lol/match/v5/matches/" + matchID + "?api_key=" + API_KEY)
+                .then(response => response.data);
+            matchDataArray.push(matchData);
+        }
+        
+        res.json(matchDataArray);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred while fetching data.");
+    }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
