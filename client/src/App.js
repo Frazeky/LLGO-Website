@@ -50,8 +50,8 @@ function App() {
               />
               <div className="game-info">
                 <h3>Match {index + 1}</h3>
-                <p><strong>Game Duration:</strong> {info.gameDuration}s</p>
-                <p><strong>Game Type:</strong> {info.gameType}</p>
+                <p><strong>Game Duration:</strong> {game.gameDuration}s</p>
+                <p><strong>Game Type:</strong> {game.gameType}</p>
               </div>
               <button className="details-button">View Details</button>
             </div>
